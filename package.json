@@ -1,0 +1,61 @@
+{
+  "name": "growler-prowler",
+  "version": "0.0.0",
+  "description": "",
+  "author": "support@expo.io",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "jest",
+    "lint": "eslint .",
+    "prettier": "eslint . --fix"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "@expo/ex-navigation": "^3.0.0",
+    "@expo/react-native-fade-in-image": "^1.1.1",
+    "@expo/react-native-image-gallery": "^1.0.4",
+    "@expo/react-native-read-more-text": "^1.0.0",
+    "@expo/react-native-touchable-native-feedback-safe": "^1.1.2",
+    "@expo/vector-icons": "^4.0.0",
+    "date-fns": "^2.0.0-alpha.1",
+    "days": "^1.0.2",
+    "expo": "18.0.6",
+    "fbemitter": "^2.1.1",
+    "firebase": "^4.3.0",
+    "geolib": "^2.0.21",
+    "immutable": "^3.8.1",
+    "invariant": "^2.2.2",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
+    "react": "16.0.0-alpha.12",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-18.0.1.tar.gz",
+    "react-native-app-link": "^0.4.0",
+    "react-native-fade-in-image": "1.0.3",
+    "react-native-firebase": "^2.1.2",
+    "react-native-linear-gradient": "^2.3.0",
+    "react-native-platform-touchable": "1.1.1",
+    "react-native-root-modal": "^1.0.5",
+    "react-native-tab-view": "^0.0.66",
+    "react-native-vector-icons": "^4.3.0",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-effex": "^1.1.2",
+    "redux-persist": "^4.8.2",
+    "sentry-expo": "1.2.0",
+    "time-js": "0.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-config-react-native-prettier": "1.0.0",
+    "jest-expo": "~18.0.0",
+    "react-native-scripts": "^0.0.40"
+  }
+}

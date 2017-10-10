@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Evely",
+    "description": "The best Weekend app!",
+    "slug": "evely",
+    "sdkVersion": "18.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "privacy": "unlisted",
+    "icon": "./assets/icons/app-icon.png",
+    "notification": {
+      "icon": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+      "color": "#000000"
+    },
+    "loading": {
+      "icon": "./icon.png",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "bundleIdentifier": "com.evely.evely"
+    },
+    "android": {
+      "package": "com.evely.evely"
+    }
+  }
+}
