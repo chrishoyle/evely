@@ -17,8 +17,6 @@ import Actions from '../state/Actions';
 import openExternalMapApp from '../utilities/openExternalMapApp';
 import * as firebase from 'firebase';
 
-const VENUE_LATITUDE = 45.524166;
-const VENUE_LONGITUDE = -122.681645;
 const UBER_CLIENT_ID = 'abc123';
 
 @connect((data, props) => BreakDetailScreen.getDataProps(data, props))
@@ -122,8 +120,6 @@ export default class BreakDetailScreen extends React.PureComponent {
               <View style={styles.mapActionsSeparator} />
               {this._renderRideShareButton()}
             </View>
-
-            {this._maybeRenderRideOptions()}
           </View>
           </View>
         </ScrollView>
@@ -265,30 +261,10 @@ export default class BreakDetailScreen extends React.PureComponent {
     );
   }
 
-  _maybeRenderRideOptions() {
-    return (
-      <View
-        style={[
-          styles.rideOptions,
-          this.state.showRideOptions && { height: 170 },
-        ]}>
-        <Touchable
-          foreground={Touchable.Ripple('#ccc', false)}
-          onPress={this._openLyftAsync}>
-          <Image style={styles.rideButton} source={Images.lyftButton} />
-        </Touchable>
-        <Touchable
-          foreground={Touchable.Ripple('#ccc', false)}
-          onPress={this._openUberAsync}>
-          <Image style={styles.rideButton} source={Images.uberButton} />
-        </Touchable>
-      </View>
-    );
-  }
 
   _openLyftAsync = () => {
-    const lat = `destination[latitude]=${event.lat}`;
-    const lng = `destination[longitude]=${event.longitude}`;
+    const lat = `destination[latitude]=${this.props.event.lat}`;
+    const lng = `destination[longitude]=${this.props.event.longitude}`;
     const lyft = `lyft://ridetype?${lat}&${lng}`;
 
     maybeOpenURL(lyft, {
@@ -301,11 +277,11 @@ export default class BreakDetailScreen extends React.PureComponent {
   _openUberAsync = () => {
     const pickup = 'action=setPickup&pickup=my_location';
     const client = `client_id=${UBER_CLIENT_ID}`;
-    const lat = `dropoff[latitude]=${event.lat}`;
-    const lng = `dropoff[longitude]=${event.longitude}`;
-    const nick = `dropoff[nickname]=${event.placeName}`;
-    const addr_format = {event.street}.replace(" ","%20");
-    const city_format = {event.city}.replace(" ","%20");
+    const lat = `dropoff[latitude]=${this.props.event.lat}`;
+    const lng = `dropoff[longitude]=${this.props.event.longitude}`;
+    const nick = `dropoff[nickname]=${this.props.event.placeName}`;
+    const addr_format = `{this.props.event.street}.replace(" ","%20")`;
+    const city_format = `{this.props.event.city}.replace(" ","%20")`;
     const daddr = `dropoff[formatted_address]=addr_format + city_format`;
     const uber = `uber:?${pickup}&${client}&${lat}&${lng}&${nick}&${daddr}`;
 
@@ -327,26 +303,23 @@ export default class BreakDetailScreen extends React.PureComponent {
         buttonIndex => {
           console.log({ buttonIndex });
           if (buttonIndex == 0) {
-            this._openUberAsync;
+            this._openUberAsync();
           }
           else if (buttonIndex == 1) {
-            this._openLyftAsync;
+            this._openLyftAsync();
           }
         }
       );
    };
 
   _handlePress = () => {
-    const addr_format = {event.street}.replace(" ","+");
-    const city_format = {event.city}.replace(" ","+");
+    const addr_format = `{event.street}.replace(" ","+")`;
+    const city_format = `{event.city}.replace(" ","+")`;
     const map_addr = addr_format + city_format;
     openExternalMapApp(map_addr);
   };
 
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -358,16 +331,6 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: '#E8E8E8',
     backgroundColor: '#fff',
-  },
-  AttendingCardBody: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingBottom: 9,
-  },
-  AttendingCardText: {
-    color: '#888',
-    marginLeft: 5,
-    marginBottom: 1,
   },
   backButton: {
     position: 'absolute',
@@ -410,16 +373,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: Colors.snow,
   },
-  center: {
-    alignItems: 'center',
-  },
-  button: {
-    marginTop: 25,
-    width:150,
-    color: Colors.darkPurple,
-    borderWidth: 1,
-    borderColor:Colors.darkPurple,
-  },
   card: {
     paddingTop: 20,
     paddingHorizontal: 10,
@@ -457,10 +410,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Medium',
     fontSize: 16,
     letterSpacing: -0.19,
-    color: Colors.snow,
-  },
-  meridiem: {
-    fontSize: 11,
     color: Colors.snow,
   },
   content: {
@@ -511,12 +460,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 12,
   },
-  venueName: {
-    fontFamily: 'Montserrat-SemiBold',
-    fontSize: 17,
-    letterSpacing: 0,
-    color: Colors.darkPurple,
-  },
   venueAddress: {
     fontFamily: 'Montserrat-Light',
     fontSize: 13,
@@ -553,22 +496,5 @@ const styles = StyleSheet.create({
   },
   getRideIcon: {
     marginRight: 15,
-  },
-  rideButton: {
-    margin: 1.2 * Layout.smallMargin,
-  },
-  rideOptions: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 0,
-    overflow: 'hidden',
-    backgroundColor: '#EDEDED',
-  },
-  flip: {
-    transform: [
-      {
-        rotate: '180 deg',
-      },
-    ],
   },
 });

@@ -82,7 +82,7 @@ export default class EventListScreen extends React.Component {
   }
 
   _handlePressTab = index => {
-    // Scroll to the top if you double tap it
+    // Scroll to the top if user double taps
     if (this.state.index === index) {
       this._scrollToTop();
       return;
@@ -199,31 +199,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  page: {
-    width: Layout.window.width,
-  },
-  row: {
-    flex: 1,
-    backgroundColor: Colors.snow,
-    marginVertical: Layout.smallMargin,
-  },
-  boldLabel: {
-    fontWeight: 'bold',
-    color: Colors.text,
-  },
-  label: {
-    color: Colors.text,
-  },
   listContent: {
     paddingTop: 0,
     paddingBottom: 20,
-  },
-  timeline: {
-    width: 2,
-    backgroundColor: '#6E3C7B',
-    position: 'absolute',
-    top: 85,
-    bottom: 0,
-    right: 11,
   },
 });
