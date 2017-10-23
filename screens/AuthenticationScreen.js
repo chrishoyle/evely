@@ -124,21 +124,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 250,
   },
-  guestButton: {
-    marginTop: 15,
-    backgroundColor: '#eee',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    alignItems: 'center',
-    width: 250,
-  },
   facebookButtonText: {
     fontSize: 15,
     color: '#fff',
-  },
-  guestButtonText: {
-    fontSize: 15,
-    color: 'rgba(0,0,0,0.9)',
   },
 });

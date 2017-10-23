@@ -9,10 +9,8 @@ const Images = {
   inactiveInfoIcon: require('../assets/images/Icons/icon-more.png'),
   inactiveLocationIcon: require('../assets/images/Icons/gear.png'),
   inactiveScheduleIcon: require('../assets/images/Icons/icon-schedule.png'),
-  lyftButton: require('../assets/images/lyft-button.png'),
   markerIcon: require('../assets/images/Icons/icon-marker.png'),
   purpleArrowIcon: require('../assets/images/Icons/icon-purple-arrow.png'),
-  uberButton: require('../assets/images/uber-button.png'),
 };
 
 Images.forLocalCache = [

@@ -24,10 +24,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import Actions from '../state/Actions';
 
-const MAP_TAP_THRESHOLD = 100;
-const SCROLL_TARGET_FOR_MAP_FOCUS = Layout.screenHeight / 4.25;
-const ACTIVE_MAP_HEIGHT = Layout.screenHeight - SCROLL_TARGET_FOR_MAP_FOCUS;
-
 @connect(data => SettingScreen.getDataProps)
 export default class SettingScreen extends React.Component {
   static route = {
@@ -119,68 +115,63 @@ export default class SettingScreen extends React.Component {
             </View>
 
             <View style={styles.section}>
-            <View style={styles.row}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.descr}>Name: </Text>
+              <View style={styles.row}>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.descr}>Name: </Text>
+                  <View
+                    style={{
+                      borderBottomColor: Colors.snow,
+                      borderBottomWidth: 1,
+                    }}
+                  />
+        
+                    <Text style={styles.text}>{this.props.currentUser.name}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.titleContainer}>
+                  <Text style={styles.descr}>Email: </Text>
+                  <Text style={styles.text}>{this._getEmail()}</Text>
+                </View>
+
+                <View style={styles.flex}>
+                  <Text style={styles.descr}>City: </Text>
+                  <Text style={styles.text}>Washington, D.C.</Text>
+                </View>
+                
+              </View>
+
+
+              <View style={styles.flex}>
+                <Text style={styles.title}>Notifications</Text>
                 <View
                   style={{
                     borderBottomColor: Colors.snow,
                     borderBottomWidth: 1,
+                    width:120,
+                    top:60,
+                    left:40,
                   }}
                 />
-      
-                <Text style={styles.text}>{this.props.currentUser.name}</Text>
               </View>
-              </View>
-              <View style={styles.titleContainer}>
-                <Text style={styles.descr}>Email: </Text>
-                
-                <Text style={styles.text}>{this._getEmail()}</Text>
-              </View>
-              <View style={styles.flex}>
-                <Text style={styles.descr}>City: </Text>
-                <Text style={styles.text}>Washington, D.C.</Text>
-              </View>
-              
-            </View>
-
-
-            <View style={styles.flex}>
-              <Text style={styles.title}>Notifications</Text>
-              <View
-                style={{
-                  borderBottomColor: Colors.snow,
-                  borderBottomWidth: 1,
-                  width:120,
-                  top:60,
-                  left:40,
-                }}
-              />
-            </View>
 
             <View style={styles.section}>
-            <View style={styles.row}>
-              <Text style={styles.descr}>💬 Weekly update</Text>
-              <View style={styles.flex}>
-                <Text style={styles.details}>We'll send you an alert on Thursday evening 
-                with the weekend's events</Text>
-                <Switch
-                  onValueChange={this._handleToggleSwitch}
-                  value={this.state.switchValue}
-                  style={styles.switch}
-                />
+              <View style={styles.row}>
+                <Text style={styles.descr}>💬 Weekly update</Text>
+                <View style={styles.flex}>
+                  <Text style={styles.details}>We'll send you an alert on Thursday evening 
+                  with the weekend's events</Text>
+                  <Switch
+                    onValueChange={this._handleToggleSwitch}
+                    value={this.state.switchValue}
+                    style={styles.switch}
+                  />
               </View>
             </View>
-            </View>
-            
-
-            
-            
-
           </View>
 
+        </View>
         </ScrollView>
-
       </PurpleGradient>
     );
   }
@@ -192,15 +183,9 @@ export default class SettingScreen extends React.Component {
     return this.props.currentUser.email;
   };
 
-
-
   _scrollToTop = () => {
     this._scrollView && this._scrollView.getNode().scrollTo({ x: 0, y: 0 });
   };
-
-
-
-
 }
 
 const styles = StyleSheet.create({
@@ -210,27 +195,11 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection:'row',
   },
-  cardBody: {
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-  },
   text: {
     height: 30,
     color:'#FFF',
     fontSize: 17,
     flex:2
-  },
-  mainContainer: {
-    paddingTop: 0,
-    flex: 1,
-    backgroundColor: Colors.transparent,
-  },
-  backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
   },
   title: {
     fontFamily: 'Montserrat-Medium',
@@ -273,28 +242,6 @@ const styles = StyleSheet.create({
   switch: {
      marginVertical: 14,
      left:50,
-  },
-  sectionHeader: {
-    padding: Layout.baseMargin,
-    backgroundColor: Colors.frost,
-  },
-  sectionText: {
-    ...Fonts.style.normal,
-    paddingVertical: Layout.doubleBaseMargin,
-    color: Colors.snow,
-    marginVertical: Layout.smallMargin,
-    textAlign: 'center',
-  },
-  subtitle: {
-    color: Colors.snow,
-    padding: Layout.smallMargin,
-    marginBottom: Layout.smallMargin,
-    marginHorizontal: Layout.smallMargin,
-  },
-  titleText: {
-    ...Fonts.style.h2,
-    fontSize: 14,
-    color: Colors.text,
   },
   headingContainer: {
     alignItems: 'center',
